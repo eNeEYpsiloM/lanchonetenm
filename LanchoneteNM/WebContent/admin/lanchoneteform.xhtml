@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="../WEB-INF/templates/padrao.xhtml">
+	<ui:define name="conteudo">
+		<h:messages></h:messages>
+		<h:form role="form">
+			<h:panelGrid rendered="#{!empty produtoMB.produto.id}">
+				<div class="form-group">
+					<h:outputLabel value="Código" />
+					<h:inputText styleClass="form-control" readonly="true"
+						value="#{produtoMB.produto.id}" />
+				</div>
+			</h:panelGrid>
+			<h:inputHidden value="#{produtoMB.produto.id}" />
+			<div class="form-group">
+				<h:outputLabel value="Loja" />
+				<h:selectOneMenu styleClass="form-control"
+					value="#{produtoMB.produto.loja}">
+					<f:selectItem itemLabel="---" />
+					<f:selectItems value="#{lojaMB.lojas}" var="loja"
+						itemLabel="#{loja.nome}" itemValue="#{loja}" />
+				</h:selectOneMenu>
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Tipo Produto" />
+				<h:inputText styleClass="form-control"
+					value="#{produtoMB.produto.prodTipo}" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Descrição" />
+				<h:inputText styleClass="form-control"
+					value="#{produtoMB.produto.descricao}" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Marca" />
+				<h:inputText styleClass="form-control"
+					value="#{produtoMB.produto.marca}" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Valor Unitário" />
+				<h:inputText styleClass="form-control"
+					value="#{produtoMB.produto.valor}" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Data Entrada" />
+				<h:inputText styleClass="form-control"
+					value="#{produtoMB.produto.dataEstoque}">
+					<f:convertDateTime locale="pt_BR" />
+				</h:inputText>
+			</div>
+			<h:commandButton styleClass="btn btn-success" value="Salvar"
+				action="#{produtoMB.salvar}" />
+			<button type="reset" class="btn btn-default">Restaurar</button>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

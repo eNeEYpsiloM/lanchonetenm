@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="../WEB-INF/templates/padrao.xhtml">
+	<ui:define name="titulo">Lista de Produtos</ui:define>
+	<ui:define name="cabecalho">
+	    Produtos<small>Listar</small>
+	</ui:define>
+	<ui:define name="conteudo">
+		<h:form>
+			<h:dataTable value="#{produtoMB.produtos}" var="produto"
+				styleClass="table">
+				<h:column>
+					<f:facet name="header">Código</f:facet>
+					<h:outputText value="#{produto.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Tipo Produto</f:facet>
+					<h:outputText value="#{produto.prodTipo}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>
+					<h:outputText value="#{produto.descricao}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Marca</f:facet>
+					<h:outputText value="#{produto.marca}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Valor Unitário</f:facet>
+					<h:outputText value="#{produto.valor}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Loja</f:facet>
+					<h:outputText value="#{produto.loja.nome}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Data Entrada</f:facet>
+					<h:outputText value="#{produto.dataEstoque}">
+						<f:convertDateTime locale="pt_BR" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Editar/Excluir</f:facet>
+					<h:commandLink action="#{produtoMB.editar(produto.id)}"
+						styleClass="btn">
+						<span class="glyphicon glyphicon-pencil"></span>
+					</h:commandLink>
+					<h:commandLink action="#{produtoMB.excluir(produto.id)}"
+						styleClass="btn">
+						<span class="glyphicon glyphicon-trash"></span>
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+		<h:panelGrid rendered="#{empty produtoMB.produtos}">
+		Sem registros de produtos, por favor cadastre um novo produto.
+		</h:panelGrid>
+		<ui:include src="../WEB-INF/templates/logo.xhtml"></ui:include>
+	</ui:define>
+</ui:composition>
+</html>
